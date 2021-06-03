@@ -1,27 +1,31 @@
 <template>
   <div class="home">
     <!-- Playing with values -->
-    <h1>Blog Posts</h1>
     <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length">
+    <div v-if="posts.length" class="layout">
       <PostList :posts="posts" />
+      <span class="tag-cloud-home">
+        <TagCloud :posts="posts"/>
+      </span>
     </div>
     <div v-if="!posts.length && !error">
       <Spinner /> 
     </div>
   </div>
+
 </template>
 
 <script>
 import PostList from '../components/PostList.vue'
 import getPosts from '../composables/getPosts'
 import Spinner from '../components/Spinner.vue'
+import TagCloud from '../components/TagCloud.vue'
 
 export default {
   // name of page
   name: 'Home',
   // pass components used
-  components: { PostList, Spinner },
+  components: { PostList, Spinner, TagCloud },
   setup() {
     // run getPosts function  // deconstruct and grab returned values from function 
     const { posts, error, load } = getPosts() 
@@ -35,14 +39,20 @@ export default {
 </script>
 
 <style>
-  h1 {
-    border: 1px solid rgb(204, 204, 219);
-    text-align: center;
-    max-width: 200px;
-  }
   .home {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px;
+    padding-bottom: 0px;
+  }
+  .tag-cloud-home {
+    max-width: 100%;
+  }
+  .tag-cloud-home a:hover {
+    color: #0c00af;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
   }
 </style>

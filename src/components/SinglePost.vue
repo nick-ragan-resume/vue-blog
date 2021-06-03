@@ -2,10 +2,11 @@
   <div class="post">
       <router-link :to="{ name: 'Details', params: { id: post.id }}">
           <h3>{{ post.title }}</h3>
+          <p>{{ snippet }}</p>
       </router-link>
-      
-      <p>{{ snippet }}</p>
       <span class="tags" ></span><span class="tag" v-for="tag in post.tags" :key="tag">#{{ tag + ' '}}</span>
+      
+      
   </div>
 </template>
 
@@ -30,17 +31,18 @@ export default {
     margin: 0 40px 30px;
     padding-bottom: 30px;
     border-bottom: 1px dashed #e7e7e7;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+  .post a {
+    text-decoration: none;
   }
   .post h3 {
-    display: inline-block;
+    text-decoration: none;
     position: relative;
     font-size: 26px;
     color: #1100ff;
-    margin-bottom: 10px;
     max-width: 400px;
-  }
-  .tags {
-      padding-left: 5%;
   }
   .tag {
       font-weight: 550;

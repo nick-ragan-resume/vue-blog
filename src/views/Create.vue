@@ -17,6 +17,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
@@ -25,6 +26,11 @@ export default {
         const body = ref('')
         const tag = ref('')
         const tags = ref([])
+
+        // use router with Composition API
+        const router = useRouter()
+        // test => console.log(router)
+
         // append tags array with tags created
         const handleKeydown = () => {
             if (!tags.value.includes(tag.value)) {
@@ -46,6 +52,9 @@ export default {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(post)
             })
+
+            // redirect Home after post is submitted
+            router.push({ name: 'Home' })
         }
         // return everythin used
         return { title, body, tag, handleKeydown, tags, handleSubmit }
@@ -58,6 +67,8 @@ export default {
     max-width: 480px;
     margin: 0 auto;
     text-align: left;
+    max-width: 90%;
+    padding-bottom: 20px;
   }
   input, textarea {
     display: block;
